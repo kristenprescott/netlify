@@ -9,11 +9,16 @@ import { ReactComponent as Logo } from "../../common/assets/logo.svg";
 const styles: InlineStylesModel = {
   container: {
     display: "flex",
-    // flexDirection: "column",
+    flexDirection: "column",
     justifyContent: "start",
     alignItems: "center",
     borderBottom: "1px solid gainsboro",
     padding: 5,
+  },
+  wrapper: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   appName: {
     cursor: "pointer",
@@ -35,14 +40,16 @@ export const PageHeader = (): JSX.Element => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.logo}>
-        <Logo height="42" width="42" />
-      </div>
+      <div style={styles.wrapper}>
+        <div style={styles.logo}>
+          <Logo height="76" width="76" />
+        </div>
 
-      <div style={styles.appName}>
-        <Link to="/" style={styles.link}>
-          Foxglove
-        </Link>
+        <div style={styles.appName}>
+          <Link to="/" style={styles.link}>
+            <h3>Netlify Identity Test</h3>
+          </Link>
+        </div>
       </div>
 
       <div style={styles.userName}>{user ? "Log in" : user}</div>

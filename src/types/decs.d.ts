@@ -2,3 +2,4 @@
 * Example use:
 declare module 'react-simple-animate';
 */
+declare module "*.svg";
