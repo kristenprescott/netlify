@@ -1,73 +1,20 @@
 import "./App.css";
-import {
-  IdentityContextProvider,
-  useIdentityContext,
-} from "react-netlify-identity";
-import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import Private from "../pages/Private";
-
-import { CreateAccount, Login, Welcome } from "../pages";
-
-interface Props {
-  children?: any;
-  // any props that come into the component
-}
-
-// const PublicRoute: React.FunctionComponent<Props> = (props: Props) => {
-//   const { isLoggedIn } = useIdentityContext();
-//   return isLoggedIn ? <Navigate to="home" /> : <Route {...props} />;
-// };
-
-// const PrivateRoute: React.FunctionComponent<Props> = (props: Props) => {
-//   const { isLoggedIn } = useIdentityContext();
-
-//   return isLoggedIn ? <Route {...props} /> : <Navigate to="welcome" />;
-// };
-
-// function PublicRoute({ children }: Props) {
-//   const { isLoggedIn } = useIdentityContext();
-//   return isLoggedIn ? <Navigate to="home" /> : children;
-// }
-
-function PrivateRoute({ children }: Props) {
-  const { isLoggedIn } = useIdentityContext();
-  return isLoggedIn ? children : <Navigate to="login" />;
-}
+import { IdentityContextProvider } from "react-netlify-identity-widget";
+import "react-netlify-identity-widget/styles.css";
+import AuthStatusView from "./AuthStatusView";
 
 export const App: React.FunctionComponent = () => {
+  // const url = process.env.REACT_APP_NETLIFY_IDENTITY_URL; // should look something like "https://foo.netlify.com"
   const url = "https://frolicking-dodol-a35793.netlify.app/";
 
-  return (
-    <>
-      <IdentityContextProvider url={url}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/createaccount" element={<CreateAccount />} />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <Private />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
+  if (!url)
+    throw new Error(
+      "process.env.REACT_APP_NETLIFY_IDENTITY_URL is blank2, which means you probably forgot to set it in your Netlify environment variables"
+    );
 
-        {/* <BrowserRouter>
-          <Routes>
-            <PublicRoute exact path="/" element={Welcome} />
-            <PublicRoute path="/welcome" element={Welcome} />
-            <PublicRoute path="/createaccount" element={CreateAccount} />
-            <PublicRoute path="/login" element={Login} />
-            <PrivateRoute path="/home" element={Home} />
-          </Routes>
-        </BrowserRouter> */}
-      </IdentityContextProvider>
-    </>
+  return (
+    <IdentityContextProvider url={url}>
+      <AuthStatusView />
+    </IdentityContextProvider>
   );
 };
-
-// const Public = () => <div>public</div>;
