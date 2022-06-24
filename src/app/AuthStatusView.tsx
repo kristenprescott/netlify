@@ -1,4 +1,5 @@
 import React from "react";
+import { InlineStylesModel } from "models/InlineStylesModel";
 import {
   IdentityModal,
   useIdentityContext,
@@ -6,6 +7,37 @@ import {
 
 // // code split the modal til you need it!
 // const IdentityModal = React.lazy(() => import('react-netlify-identity-widget'))
+
+const styles: InlineStylesModel = {
+  container: {
+    width: "100vw",
+    height: "100vh",
+    display: "flex",
+    backgroundColor: "bisque",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  header: {
+    width: "100%",
+    margin: "15px",
+    borderBottom: "1px solid tomato",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  divider: {
+    margin: "9px 0px",
+  },
+  outbtn: {
+    maxWidth: 400,
+    background: "orangered",
+  },
+  inbtn: {
+    maxWidth: 400,
+    background: "darkgreen",
+  },
+};
 
 function AuthStatusView() {
   const identity = useIdentityContext();
@@ -26,8 +58,8 @@ function AuthStatusView() {
     identity.user.user_metadata.avatar_url;
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div style={styles.container}>
+      <header style={styles.header}>
         {identity && identity.isLoggedIn ? (
           <>
             <h1> hello {name}!</h1>
@@ -40,7 +72,7 @@ function AuthStatusView() {
             )}
             <button
               className="btn"
-              style={{ maxWidth: 400, background: "orangered" }}
+              style={styles.outbtn}
               onClick={() => setDialog(true)}
             >
               LOG OUT
@@ -51,7 +83,7 @@ function AuthStatusView() {
             <h1> hello! try logging in! </h1>
             <button
               className="btn"
-              style={{ maxWidth: 400, background: "darkgreen" }}
+              style={styles.inbtn}
               onClick={() => setDialog(true)}
             >
               LOG IN
@@ -67,8 +99,8 @@ function AuthStatusView() {
           onLogout={() => console.log("bye ", name)}
         />
 
-        <h3>
-          Or{" "}
+        {/* <h3>
+          Or
           <a
             href="https://github.com/sw-yx/react-netlify-identity-widget"
             target="_blank"
@@ -77,7 +109,7 @@ function AuthStatusView() {
           >
             view the source
           </a>
-        </h3>
+        </h3> */}
       </header>
     </div>
   );
