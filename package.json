@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "netlify-plugin-identity-sso": "netlify/netlify-plugin-identity-sso#v0.1.0",
     "@reach/dialog": "^0.17.0",
     "@reach/tabs": "^0.17.0",
     "@reach/visually-hidden": "^0.17.0",

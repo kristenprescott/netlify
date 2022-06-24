@@ -1,6 +1,6 @@
 import "./App.css";
-import { IdentityContextProvider } from "react-netlify-identity-widget";
 import "react-netlify-identity-widget/styles.css";
+import { IdentityContextProvider } from "react-netlify-identity-widget";
 import AuthStatusView from "./AuthStatusView";
 
 export const App: React.FunctionComponent = () => {
